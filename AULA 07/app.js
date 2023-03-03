@@ -60,8 +60,8 @@ const exibindoDados = function () {
 
     // Percorrendo um array com FOREACH
     console.log('Exemplo com FOREACH (forma mais antiga)');
-    for (item in listaNomes) {
-        console.log(`O nome do aluno é: ${listaNomes[item]}`);
+    for (itemProduto in listaNomes) {
+        console.log(`O nome do aluno é: ${listaNomes[itemProduto]}`);
     }
 
     console.log('Exemplo com FOREACH');
@@ -81,11 +81,11 @@ const manipulandoDados = function () {
     listaProdutos.unshift('HD', 'Placa-Mãe', 'SSD');
     console.table(listaProdutos);
 
-    // pop - Remove o último item do Array, preservando os elementos anteriores
+    // pop - Remove o último itemProduto do Array, preservando os elementos anteriores
     listaProdutos.pop();
     console.table(listaProdutos);
 
-    // shift - Remove o item do inicio do Array, re-organizando os elementos anteriores
+    // shift - Remove o itemProduto do inicio do Array, re-organizando os elementos anteriores
     listaProdutos.shift();
     console.table(listaProdutos);
 
@@ -93,9 +93,9 @@ const manipulandoDados = function () {
     const novosProdutos = listaProdutos.slice()
     console.log(novosProdutos);
 
-    // indexOf - Permite buscar dentro de um Array um item
-    // Se o retorno for -1, o item não foi encontrado
-    // Se o retorno for maior ou igual 0, o item foi encontrado e ele retorna o indice
+    // indexOf - Permite buscar dentro de um Array um itemProduto
+    // Se o retorno for -1, o itemProduto não foi encontrado
+    // Se o retorno for maior ou igual 0, o itemProduto foi encontrado e ele retorna o indice
     console.log(listaProdutos.indexOf('PC'));
 
     // Exemplo de utilização do indexOf
@@ -127,7 +127,7 @@ const removerProduto = function (nomeProduto) {
 
 };
 
-const removerItem = function (array ,nomeItem) {
+const removerItem = function (array, nomeItem) {
     // Entrada
     let nome = nomeItem;
     let listaItens = array.slice();
@@ -152,32 +152,32 @@ const removerItem = function (array ,nomeItem) {
 };
 
 const listagemProdutos = function () {
-// Forma nº1 de criar um JSON e já atribuir chaves e valores
+    // Forma nº1 de criar um JSON e já atribuir chaves e valores
     // let listProdutosJSON = {produtos : listaProdutos, clientes : listaNomes};
 
-// Forma nº2 de criar um JSON, onde as chaves e valores são atribuidas no decorrer do projeto
+    // Forma nº2 de criar um JSON, onde as chaves e valores são atribuidas no decorrer do projeto
     // let listProdutosJSON = {};
 
     // listProdutosJSON.produtos = listaProdutos;
     // listProdutosJSON.clientes = listaNomes;
 
-// Extraindo valores de um JSON e ARRAY
+    // Extraindo valores de um JSON e ARRAY
     // console.log(listProdutosJSON);
     // console.log(listProdutosJSON.produtos[1]);
     // console.log(listProdutosJSON.clientes[5]);
 
     let listProdutosJSON = {}
     let listProdutosArray = [
-                            {nome : 'Monitor', quantidade : 300, marca : 'DELL', valor : 1000, codigo : 1},
-                            {nome : 'Monitor', quantidade : 280, marca : 'LG', valor : 1300, codigo : 2},
-                            {nome : 'Teclado', quantidade : 800, marca : 'DELL', valor : 200, codigo : 3},
-                            {nome : 'Teclado', quantidade : 360, marca : 'LG', valor : 230, codigo : 4},
-                            {nome : 'Teclado', quantidade : 80, marca : 'Logitech', valor : 120, codigo : 5},
-                            {nome : 'Teclado', quantidade : 100, marca : 'Razer', valor : 1230, codigo : 6},
-                            {nome : 'Mouse', quantidade : 790, marca : 'DELL', valor : 115, codigo : 7},
-                            {nome : 'Mouse', quantidade : 25, marca : 'Razer', valor : 800, codigo : 8}
-                        ];
-    
+        { nome: 'Monitor', quantidade: 300, marca: 'DELL', valor: 1000, codigo: 1 },
+        { nome: 'Monitor', quantidade: 280, marca: 'LG', valor: 1300, codigo: 2 },
+        { nome: 'Teclado', quantidade: 800, marca: 'DELL', valor: 200, codigo: 3 },
+        { nome: 'Teclado', quantidade: 360, marca: 'LG', valor: 230, codigo: 4 },
+        { nome: 'Teclado', quantidade: 80, marca: 'Logitech', valor: 120, codigo: 5 },
+        { nome: 'Teclado', quantidade: 100, marca: 'Razer', valor: 1230, codigo: 6 },
+        { nome: 'Mouse', quantidade: 790, marca: 'DELL', valor: 115, codigo: 7 },
+        { nome: 'Mouse', quantidade: 25, marca: 'Razer', valor: 800, codigo: 8 }
+    ];
+
     // Arrays para cores
     let listCoresDellArray = ['Preto', 'Branco', 'Cinza'];
     let listCoresLgArray = ['Preto', 'Cinza'];
@@ -187,7 +187,7 @@ const listagemProdutos = function () {
     // Arrays para modelo
     let listModelosMonitor = ['LCD', 'LED', 'OLED', '4k', 'IPS'];
     let listModelosTeclado = ['Mecânico', 'Semi-Mecânico', 'Membrana', 'Óptico'];
-    
+
     // Adiciona o array de produtos dentro de um JSON
     listProdutosJSON.produtos = listProdutosArray;
 
@@ -221,21 +221,55 @@ const listagemProdutos = function () {
 
     // console.log(listProdutosJSON);
 
+    // Percorre o array de produtos para listar os itens
+    listProdutosJSON.produtos.forEach(function (itemProduto) {
+        console.log('Nome: ' + itemProduto.nome);
+        console.log('Marca: ' + itemProduto.marca);
+
+        // Tratamento de erro para quando não existir array de cores
+        if (itemProduto.cores != undefined) {
+            // Percorre o array de cores que está dentro do array de produtos(itemProduto)
+            itemProduto.cores.forEach(function (itemCor) {
+                console.log('Cor: ' + itemCor);
+            });
+        }
+
+        // Tratamento de erro para quando não existir array de modelos
+        if (itemProduto.modelos != undefined) {
+            // Percorre o array de modelos que está dentro do array de produtos(itemProduto)
+            itemProduto.modelos.forEach(function (itemModelo) {
+                console.log('Modelo: ' + itemModelo);
+            });
+        }
+    });
+
+    // for (let contProdutos = 0; contProdutos < listProdutosJSON.produtos.length; contProdutos++) {
+    //     console.log('Nome: ' + listProdutosJSON.produtos[contProdutos].nome);
+    //     console.log('Marca: ' + listProdutosJSON.produtos[contProdutos].marca);
+
+    //     if (listProdutosJSON.produtos[contProdutos].cores != undefined) {
+    //         for (let contCores = 0; contCores < listProdutosJSON.produtos[contProdutos].cores.length; contCores++) {
+    //             console.log('Cor: ' + listProdutosJSON.produtos[contProdutos].cores[contCores]);
+    //         }   
+    //     }
+
+    //     if (listProdutosJSON.produtos[contProdutos].modelos != undefined) {
+    //         for (let contModelos = 0; contModelos < listProdutosJSON.produtos[contProdutos].modelos.length; contModelos++) {
+    //             console.log('Modelo: ' + listProdutosJSON.produtos[contProdutos].modelos[contModelos]);
+    //         }
+    //     }
+    // }
+
     // console.log('Nome: ' + listProdutosJSON.produtos[1].nome);
     // console.log('Marca: ' + listProdutosJSON.produtos[1].marca);
     // console.log('Valor: ' + listProdutosJSON.produtos[1].valor);
-    // console.log('Cor: ' + listProdutosJSON.produtos[1].cores[1]);
+    // console.log('Cor: ' + listProdutosJSON.produtos[1].cores);
     // console.log('Modelo: ' + listProdutosJSON.produtos[1].modelos[1]);
 
     // console.log(listProdutosJSON.produtos[1].nome);
     // console.log(listProdutosJSON.produtos[1].marca);
     // console.log(listProdutosJSON.produtos[0]);
     // console.log(listProdutosJSON.produtos[1]);
-
-    for (let contador = 0; contador < listProdutosArray.length; contador++) {
-        console.log(listProdutosJSON.produtos[contador]);
-
-    }
 
 };
 
