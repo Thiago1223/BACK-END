@@ -22668,3 +22668,12 @@ const getCidades = function (siglaEstado) {
    }
 
 }
+
+module.exports = {
+   getListaDeEstados,
+   getDadosEstado,
+   getCapitalEstado,
+   getEstadosRegiao,
+   getCapitalPais,
+   getCidades
+}
