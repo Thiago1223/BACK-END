@@ -22519,6 +22519,7 @@ const getDadosEstado = function (siglaEstado) {
    let capital
    let regiao
    let novoJSON = {}
+   let status = false
 
    estadosCidades.estados.forEach(function (estadosDados) {
       uf = estadosDados.sigla
@@ -22531,14 +22532,15 @@ const getDadosEstado = function (siglaEstado) {
          novoJSON.descricao = nome
          novoJSON.capital = capital
          novoJSON.regiao = regiao
+         status = true
       }
 
    })
    
-   if (novoJSON == undefined || siglaEstado == '') {
-      return false
-   } else {
+   if (status == true) {
       return novoJSON
+   } else {
+      return false
    }
 
 }
@@ -22549,6 +22551,7 @@ const getCapitalEstado = function (siglaEstado) {
    let nome
    let capital
    let novoJSON = {}
+   let status = false
 
    estadosCidades.estados.forEach(function (estadosDados) {
       uf = estadosDados.sigla
@@ -22559,14 +22562,15 @@ const getCapitalEstado = function (siglaEstado) {
          novoJSON.uf = uf
          novoJSON.descricao = nome
          novoJSON.capital = capital
+         status = true
       }
 
    })
    
-   if (novoJSON == undefined || siglaEstado == '') {
-      return false
-   } else {
+   if (status == true) {
       return novoJSON
+   } else {
+      return false
    }
 
 }
@@ -22578,25 +22582,25 @@ const getEstadosRegiao = function (regiao) {
    let status = false
 
    estadosCidades.estados.forEach(estado => {
-       if (estado.regiao == regiao) {
+      if (estado.regiao.toUpperCase() == regiao.toUpperCase()) {
 
-           let getUfs = {}
+         let getUfs = {}
 
-           getUfs.uf = estado.sigla
-           getUfs.descricao = estado.nome
+         getUfs.uf = estado.sigla
+         getUfs.descricao = estado.nome
 
-           arrayEstados.push(getUfs)
-           status = true
-       }
+         arrayEstados.push(getUfs)
+         status = true
+      }
    });
 
 
    if (status == true) {
-       jsonEstados.regiao = regiao
-       jsonEstados.estados = arrayEstados
-       return jsonEstados
+      jsonEstados.regiao = regiao
+      jsonEstados.estados = arrayEstados
+      return jsonEstados
    } else {
-       return status
+      return status
    }
 
 }
@@ -22641,30 +22645,29 @@ const getCidades = function (siglaEstado) {
    let nomeEstado
    let novoJSON = {}
    let cidades = []
+   let status = false
 
    estadosCidades.estados.forEach(function(estadosDados){
 
       if (estadosDados.sigla == uf) {
-         
+         status = true   
          nomeEstado = estadosDados.nome
-
          estadosDados.cidades.forEach(function(cidadeDados){
-            cidades.push(cidadeDados.nome)
+         cidades.push(cidadeDados.nome)
          })
          
       }
 
    })
 
-   novoJSON.uf = uf
-   novoJSON.descricao = nomeEstado
-   novoJSON.quantidade_cidades = cidades.length
-   novoJSON.cidades = cidades
-
-   if (novoJSON == undefined || siglaEstado == '') {
-      return false
-   } else {
+   if (status == true) {
+      novoJSON.uf = uf
+      novoJSON.descricao = nomeEstado
+      novoJSON.quantidade_cidades = cidades.length
+      novoJSON.cidades = cidades
       return novoJSON
+   } else {
+      return false
    }
 
 }
